@@ -1,1 +1,1 @@
-# Drupal-Theme-Chowder
+# Drupal Theme: Chowder
