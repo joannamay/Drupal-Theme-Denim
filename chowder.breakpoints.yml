@@ -1,0 +1,76 @@
+chowder.All:
+  label: All
+  mediaQuery: 'all'
+  weight: 0
+  multipliers:
+    - 1x
+# max (30.00 x 16px == 480px)
+chowder.xsmall:
+  label: Extra Small (max)
+  mediaQuery: 'all and (max-width: 30em)'
+  weight: 1
+  multipliers:
+    - 1x
+# min (30.01 x 16px ~= 481px)
+# max (35.50 x 16px == 768px)
+chowder.small_min:
+  label: Small (min)
+  mediaQuery: 'all and (min-width: 30.01em)'
+  weight: 2
+  multipliers:
+    - 1x
+chowder.small:
+  label: Small
+  mediaQuery: 'all and (min-width: 30.01em) and (max-width: 35.5em)'
+  weight: 2
+  multipliers:
+    - 1x
+# min (35.51 x 16px ~= 769px)
+# max (48.00 x 16px == 980px)
+chowder.medium_min:
+  label: Medium (min)
+  mediaQuery: 'all and (min-width: 35.51em)'
+  weight: 3
+  multipliers:
+    - 1x
+chowder.medium:
+  label: Medium
+  mediaQuery: 'all and (min-width: 35.51em) and (max-width: 48em)'
+  weight: 3
+  multipliers:
+    - 1x
+# min (48.01 x 16px ~= 981px)
+# max (61.25 x 16px == 1280px)
+chowder.large_min:
+  label: Large
+  mediaQuery: 'all and (min-width: 48.01em)'
+  weight: 4
+  multipliers:
+    - 1x
+chowder.large:
+  label: Large
+  mediaQuery: 'all and (min-width: 48.01em) and (max-width: 61.25em)'
+  weight: 4
+  multipliers:
+    - 1x
+# min (61.26 x 16px ~= 1281px)
+# max (80.00 x 16px == 1450px)
+chowder.xlarge_min:
+  label: Extra Large (min)
+  mediaQuery: 'all and (min-width: 61.26em)'
+  weight: 5
+  multipliers:
+    - 1x
+chowder.xlarge:
+  label: Extra Large
+  mediaQuery: 'all and (min-width: 61.26em) and (max-width: 80em)'
+  weight: 5
+  multipliers:
+    - 1x
+# min (61.26 x 16px ~= 1281px)
+chowder.grande:
+  label: Grande (min)
+  mediaQuery: 'all and (min-width: 80.01em)'
+  weight: 6
+  multipliers:
+    - 1x

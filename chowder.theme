@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the chowder theme.
+ */
+
+include_once 'preprocess/block.preprocess.php';
+include_once 'preprocess/media.preprocess.php';
+include_once 'preprocess/node.preprocess.php';
+include_once 'preprocess/paragraph.preprocess.php';
+include_once 'preprocess/view.preprocess.php';
+

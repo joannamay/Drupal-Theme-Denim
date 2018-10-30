@@ -1,0 +1,245 @@
+# Library naming structure
+#
+# library--{library-name}
+#   Use library naming structure for external libraries that will then be used as dependencies of other libraries.
+#
+# component--{component-name}
+#   Use component naming structure for reusable items that aren't necessarily entity-specific. Include these as
+#   dependencies on the entity-specific libraries.
+#
+# {entity-type}--{view-mode}
+# {entity-type}--{view-mode}--{bundle}
+#   Use entity naming structure to allow the entities to automatically attach styles when rendered.
+#
+# NOTE: Entity CSS and JS files that are included in multiple different entity-specific libraries, should probably be
+#       broken into the component structure listed above and added as a dependency on the entity-specific library.
+#
+
+# ========= Globals ========= #
+
+# === Global: Base === #
+global:
+  version: 1.0
+  css:
+    theme:
+      css/main.css : {}
+      # css/layout.css : {}
+  dependencies:
+    - core/drupal
+
+
+# === Global: External Libraries === #
+
+# jQuery: Common  #
+library--jquery-common-keydown:
+  version: 1.x
+  js:
+    //cdn.jsdelivr.net/npm/jquery-common-keydown@1.0.1/jquery.commonkeydown.min.js: { type: external, minified: true }
+
+# jQuery: Grid Navigation #
+library--jquery-grid-navigation:
+  version: 1.x
+  js:
+    //cdn.jsdelivr.net/npm/jquery-grid-navigation@1.0.1/jquery.gridnavigation.min.js: { type: external, minified: true }
+
+# jQuery: Linear Navigation #
+library--jquery-linear-navigation:
+  version: 1.x
+  js:
+    //cdn.jsdelivr.net/npm/jquery-linear-navigation@1.0.1/jquery.linearnavigation.min.js: { type: external, minified: true }
+
+# jQuery: Masonry #
+library--jquery-masonry:
+  version: 1.x
+  js:
+    //unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js: { type: external, minified: true }
+
+# jQuery: Prevent Scroll Keys #
+library--jquery-prevent-scroll-keys:
+  version: 1.x
+  js:
+    //cdn.jsdelivr.net/npm/jquery-prevent-scroll-keys@1.0.1/jquery.preventscrollkeys.min.js: { type: external, minified: true }
+
+# jQuery: Roving Tabindex #
+library--jquery-roving-tabindex:
+  version: 1.x
+  js:
+    //cdn.jsdelivr.net/npm/jquery-roving-tabindex@1.0.1/jquery.rovingtabindex.min.js: { type: external, minified: true }
+  dependencies:
+    - core/jquery
+    - chowder/library--jquery-common-keydown
+    - chowder/library--jquery-grid-navigation
+    - chowder/library--jquery-linear-navigation
+    - chowder/library--jquery-prevent-scroll-keys
+
+# Slick Slider #
+library--slick:
+  version: 1.x
+  css:
+    component:
+      //cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css: { type: external }
+      //cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css: { type: external }
+  js:
+    //cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js: { type: external, minified: true }
+
+
+# === Global: Reusable Components === #
+
+# ========= Block ========= #
+
+# Global #
+#block:
+#  version: 1.x
+#  css:
+#    component:
+#      css/libraries/block/default.css: {}
+
+
+# ========= Forms ========= #
+
+# Global #
+#form:
+#  version: 1.x
+#  css:
+#    component:
+#      css/libraries/form/default.css: {}
+
+
+# ========= Nodes ========= #
+
+# === Node: Full === #
+
+#node--full:
+#  version: 1.x
+#  css:
+#    component:
+#      css/libraries/node/full.css: {}
+#
+#node--full--page:
+#  version: 1.x
+#  css:
+#    component:
+#      css/libraries/node/full--page.css: {}
+
+# ========= Paragraphs ========= #
+
+# === Paragraph: Full === #
+
+# Global #
+#paragraph--full:
+#  version: 1.x
+#  css:
+#    component:
+#      css/libraries/paragraph/full.css: {}
+
+# Accordion #
+paragraph--full--accordion:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--accordion.css: {}
+  js:
+    js/libraries/paragraph/full--accordion.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+    - chowder/library--jquery-roving-tabindex
+
+# Hero #
+paragraph--full--hero:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--hero.css: {}
+  js:
+    js/libraries/paragraph/full--hero.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+    - chowder/library--slick
+
+# Hero Slide #
+paragraph--full--hero-slide:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--hero-slide.css: {}
+  js:
+    js/libraries/paragraph/full--hero-slide.js: {}
+
+# Media #
+paragraph--full--media:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--media.css: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+paragraph--full--media--layout-full:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--media--layout-full.css: {}
+  dependencies:
+    - chowder/paragraph--full--media
+paragraph--full--media--layout-grid:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--media--layout-grid.css: {}
+  dependencies:
+    - chowder/paragraph--full--media
+paragraph--full--media--layout-masonry:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--media--layout-masonry.css: {}
+  js:
+    js/libraries/paragraph/full--media--layout-masonry.js: {}
+  dependencies:
+    - chowder/paragraph--full--media
+    - chowder/library--jquery-masonry
+paragraph--full--media--layout-slider:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--media--layout-slider.css: {}
+  js:
+    js/libraries/paragraph/full--media--layout-slider.js: {}
+  dependencies:
+    - chowder/paragraph--full--media
+    - chowder/library--slick
+
+# Slider #
+paragraph--full--slider:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--slider.css: {}
+  js:
+    js/libraries/paragraph/full--slider.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+    - chowder/library--slick
+
+# Tabs #
+paragraph--full--tabs:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--tabs.css: {}
+  js:
+    js/libraries/paragraph/full--tabs.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+    - chowder/library--jquery-roving-tabindex
+
+# ========= Views ========= #

@@ -1,0 +1,23 @@
+name: Chowder
+type: theme
+description: 'A dense-but-tasty scaffolding theme to be used as a starter for VMLY&R projects. Works best with Water specimen (Waterwork).'
+package: VMLY&R
+core: 8.x
+base theme: bowl
+
+ckeditor_stylesheets:
+  - css/typography.css
+
+features:
+  favicon: true
+libraries:
+  - chowder/global
+regions:
+  page_top: 'Page top'
+  header: 'Header'
+  pre_content: 'Pre-content'
+  content: Content
+  post_content: 'Post-content'
+  footer_first: 'Footer: First'
+  footer_second: 'Footer: Second'
+  page_bottom: 'Page bottom'
