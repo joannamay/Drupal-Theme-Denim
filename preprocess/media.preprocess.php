@@ -5,14 +5,14 @@
  * Preprocess functions related to media entities.
  *
  * Index:
- * @see chowder_preprocess_media()
- * @see chowder_preprocess_media__remote_video__hero()
+ * @see denim_preprocess_media()
+ * @see denim_preprocess_media__remote_video__hero()
  */
 
 /**
  * Implements hook_preprocess_media().
  */
-function chowder_preprocess_media(array &$variables) {
+function denim_preprocess_media(array &$variables) {
   /** @var \Drupal\media\MediaInterface $media */
   $media = $variables['media'];
 
@@ -57,7 +57,7 @@ function chowder_preprocess_media(array &$variables) {
 /**
  * Implements hook_preprocess_media__BUNDLE__VIEW_MODE() for remote_video, hero.
  */
-function chowder_preprocess_media__remote_video__hero(array &$variables) {
+function denim_preprocess_media__remote_video__hero(array &$variables) {
   /** @var \Drupal\media\MediaInterface $media */
   $media = $variables['media'];
 

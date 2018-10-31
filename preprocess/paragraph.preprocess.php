@@ -6,18 +6,18 @@
  *
  * Index:
  *
- * @see chowder_preprocess_paragraph()
- * @see chowder_preprocess_paragraph__accordion__full()
- * @see chowder_preprocess_paragraph__accordion_item__full()
- * @see chowder_preprocess_paragraph__content__full()
- * @see chowder_preprocess_paragraph__hero__full()
- * @see chowder_preprocess_paragraph__hero_slide__full()
- * @see chowder_preprocess_paragraph__embed_iframe__full()
- * @see chowder_preprocess_paragraph__media__full()
- * @see chowder_preprocess_paragraph__section__full()
- * @see chowder_preprocess_paragraph__slider__full()
- * @see chowder_preprocess_paragraph__tabs__full()
- * @see chowder_preprocess_paragraph__tabs_tab__full()
+ * @see denim_preprocess_paragraph()
+ * @see denim_preprocess_paragraph__accordion__full()
+ * @see denim_preprocess_paragraph__accordion_item__full()
+ * @see denim_preprocess_paragraph__content__full()
+ * @see denim_preprocess_paragraph__hero__full()
+ * @see denim_preprocess_paragraph__hero_slide__full()
+ * @see denim_preprocess_paragraph__embed_iframe__full()
+ * @see denim_preprocess_paragraph__media__full()
+ * @see denim_preprocess_paragraph__section__full()
+ * @see denim_preprocess_paragraph__slider__full()
+ * @see denim_preprocess_paragraph__tabs__full()
+ * @see denim_preprocess_paragraph__tabs_tab__full()
  */
 
 use Drupal\Component\Utility\Html;
@@ -26,7 +26,7 @@ use Drupal\Core\Url;
 /**
  * Implements hook_preprocess_paragraph().
  */
-function chowder_preprocess_paragraph(array &$variables) {
+function denim_preprocess_paragraph(array &$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $bundle = $paragraph->bundle();
@@ -84,7 +84,7 @@ function chowder_preprocess_paragraph(array &$variables) {
  * Implements hook_preprocess_paragraph__BUNDLE__VIEW_MODE() for accordion,
  * full.
  */
-function chowder_preprocess_paragraph__accordion__full(array &$variables) {
+function denim_preprocess_paragraph__accordion__full(array &$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $base_class = $variables['component_base_class'];
@@ -97,7 +97,7 @@ function chowder_preprocess_paragraph__accordion__full(array &$variables) {
  * Implements hook_preprocess_paragraph__BUNDLE__VIEW_MODE() for accordion_item,
  * full.
  */
-function chowder_preprocess_paragraph__accordion_item__full(array &$variables) {
+function denim_preprocess_paragraph__accordion_item__full(array &$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $base_class = $variables['component_base_class'];
@@ -112,14 +112,14 @@ function chowder_preprocess_paragraph__accordion_item__full(array &$variables) {
 /**
  * Implements hook_preprocess_paragraph__BUNDLE__VIEW_MODE() for content, full.
  */
-function chowder_preprocess_paragraph__content__full(array &$variables) {
+function denim_preprocess_paragraph__content__full(array &$variables) {
   // Nothing to see here.
 }
 
 /**
  * Implements hook_preprocess_paragraph__BUNDLE__VIEW_MODE() for hero, full.
  */
-function chowder_preprocess_paragraph__hero__full(array &$variables) {
+function denim_preprocess_paragraph__hero__full(array &$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $base_class = $variables['component_base_class'];
@@ -132,7 +132,7 @@ function chowder_preprocess_paragraph__hero__full(array &$variables) {
  * Implements hook_preprocess_paragraph__BUNDLE__VIEW_MODE() for hero_slide,
  * full.
  */
-function chowder_preprocess_paragraph__hero_slide__full(array &$variables) {
+function denim_preprocess_paragraph__hero_slide__full(array &$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $base_class = $variables['component_base_class'];
@@ -151,7 +151,7 @@ function chowder_preprocess_paragraph__hero_slide__full(array &$variables) {
  * Implements hook_preprocess_paragraph__BUNDLE__VIEW_MODE() for embed_iframe,
  * full.
  */
-function chowder_preprocess_paragraph__embed_iframe__full(array &$variables) {
+function denim_preprocess_paragraph__embed_iframe__full(array &$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $base_class = $variables['component_base_class'];
@@ -184,7 +184,7 @@ function chowder_preprocess_paragraph__embed_iframe__full(array &$variables) {
 /**
  * Implements hook_preprocess_paragraph__VIEW_MODE() for media, full.
  */
-function chowder_preprocess_paragraph__media__full(array &$variables) {
+function denim_preprocess_paragraph__media__full(array &$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $base_class = $variables['component_base_class'];
@@ -193,19 +193,19 @@ function chowder_preprocess_paragraph__media__full(array &$variables) {
   if (!$paragraph->get('field_media_layout')->isEmpty()) {
     switch($paragraph->get('field_media_layout')->target_id) {
       case 'media_layout__full':
-        $variables['#attached']['library'][] = 'chowder/paragraph--full--media--layout-full';
+        $variables['#attached']['library'][] = 'denim/paragraph--full--media--layout-full';
         break;
 
       case 'media_layout__grid':
-        $variables['#attached']['library'][] = 'chowder/paragraph--full--media--layout-grid';
+        $variables['#attached']['library'][] = 'denim/paragraph--full--media--layout-grid';
         break;
 
       case 'media_layout__masonry':
-        $variables['#attached']['library'][] = 'chowder/paragraph--full--media--layout-masonry';
+        $variables['#attached']['library'][] = 'denim/paragraph--full--media--layout-masonry';
         break;
 
       case 'media_layout__slider':
-        $variables['#attached']['library'][] = 'chowder/paragraph--full--media--layout-slider';
+        $variables['#attached']['library'][] = 'denim/paragraph--full--media--layout-slider';
         break;
     }
   }
@@ -217,21 +217,21 @@ function chowder_preprocess_paragraph__media__full(array &$variables) {
 /**
  * Implements hook_preprocess_paragraph__VIEW_MODE() for section, full.
  */
-function chowder_preprocess_paragraph__section__full(array &$variables) {
+function denim_preprocess_paragraph__section__full(array &$variables) {
   // Nothing to see here.
 }
 
 /**
  * Implements hook_preprocess_paragraph__BUNDLE__VIEW_MODE() for slider, full.
  */
-function chowder_preprocess_paragraph__slider__full(array &$variables) {
+function denim_preprocess_paragraph__slider__full(array &$variables) {
   // Nothing to see here.
 }
 
 /**
  * Implements hook_preprocess_paragraph__BUNDLE__VIEW_MODE() for tabs, full.
  */
-function chowder_preprocess_paragraph__tabs__full(array &$variables) {
+function denim_preprocess_paragraph__tabs__full(array &$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $base_class = $variables['component_base_class'];
@@ -280,7 +280,7 @@ function chowder_preprocess_paragraph__tabs__full(array &$variables) {
 /**
  * Implements hook_preprocess_paragraph__BUNDLE__VIEW_MODE() for tabs_tab, full.
  */
-function chowder_preprocess_paragraph__tabs_tab__full(array &$variables) {
+function denim_preprocess_paragraph__tabs_tab__full(array &$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $base_class = $variables['component_base_class'];

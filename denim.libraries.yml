@@ -67,10 +67,10 @@ library--jquery-roving-tabindex:
     //cdn.jsdelivr.net/npm/jquery-roving-tabindex@1.0.1/jquery.rovingtabindex.min.js: { type: external, minified: true }
   dependencies:
     - core/jquery
-    - chowder/library--jquery-common-keydown
-    - chowder/library--jquery-grid-navigation
-    - chowder/library--jquery-linear-navigation
-    - chowder/library--jquery-prevent-scroll-keys
+    - denim/library--jquery-common-keydown
+    - denim/library--jquery-grid-navigation
+    - denim/library--jquery-linear-navigation
+    - denim/library--jquery-prevent-scroll-keys
 
 # Slick Slider #
 library--slick:
@@ -144,7 +144,7 @@ paragraph--full--accordion:
     - core/drupal
     - core/jquery
     - core/jquery.once
-    - chowder/library--jquery-roving-tabindex
+    - denim/library--jquery-roving-tabindex
 
 # Hero #
 paragraph--full--hero:
@@ -158,7 +158,7 @@ paragraph--full--hero:
     - core/drupal
     - core/jquery
     - core/jquery.once
-    - chowder/library--slick
+    - denim/library--slick
 
 # Hero Slide #
 paragraph--full--hero-slide:
@@ -185,14 +185,14 @@ paragraph--full--media--layout-full:
     component:
       css/libraries/paragraph/full--media--layout-full.css: {}
   dependencies:
-    - chowder/paragraph--full--media
+    - denim/paragraph--full--media
 paragraph--full--media--layout-grid:
   version: 1.x
   css:
     component:
       css/libraries/paragraph/full--media--layout-grid.css: {}
   dependencies:
-    - chowder/paragraph--full--media
+    - denim/paragraph--full--media
 paragraph--full--media--layout-masonry:
   version: 1.x
   css:
@@ -201,8 +201,8 @@ paragraph--full--media--layout-masonry:
   js:
     js/libraries/paragraph/full--media--layout-masonry.js: {}
   dependencies:
-    - chowder/paragraph--full--media
-    - chowder/library--jquery-masonry
+    - denim/paragraph--full--media
+    - denim/library--jquery-masonry
 paragraph--full--media--layout-slider:
   version: 1.x
   css:
@@ -211,8 +211,8 @@ paragraph--full--media--layout-slider:
   js:
     js/libraries/paragraph/full--media--layout-slider.js: {}
   dependencies:
-    - chowder/paragraph--full--media
-    - chowder/library--slick
+    - denim/paragraph--full--media
+    - denim/library--slick
 
 # Slider #
 paragraph--full--slider:
@@ -226,7 +226,7 @@ paragraph--full--slider:
     - core/drupal
     - core/jquery
     - core/jquery.once
-    - chowder/library--slick
+    - denim/library--slick
 
 # Tabs #
 paragraph--full--tabs:
@@ -240,6 +240,6 @@ paragraph--full--tabs:
     - core/drupal
     - core/jquery
     - core/jquery.once
-    - chowder/library--jquery-roving-tabindex
+    - denim/library--jquery-roving-tabindex
 
 # ========= Views ========= #

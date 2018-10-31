@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Functions to support theming in the chowder theme.
+ * Functions to support theming in the denim theme.
  */
 
 include_once 'preprocess/block.preprocess.php';

@@ -6,12 +6,12 @@
  *
  * Index:
  *
- * @see chowder_preprocess_block()
+ * @see denim_preprocess_block()
  */
 
 /**
  * Implements hook_preprocess_block().
  */
-function chowder_preprocess_block(array &$variables) {
+function denim_preprocess_block(array &$variables) {
   // Nothing to see here.
 }
