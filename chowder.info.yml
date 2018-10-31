@@ -1,6 +1,6 @@
 name: Chowder
 type: theme
-description: 'A dense-but-tasty scaffolding theme to be used as a starter for VMLY&R projects. Works best with Water specimen (Waterwork).'
+description: 'A dense-but-tasty scaffolding theme. Works best with Water specimen (Waterwork).'
 package: VMLY&R
 core: 8.x
 base theme: bowl
