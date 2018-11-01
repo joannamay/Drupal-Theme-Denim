@@ -57,5 +57,5 @@
  */
 
 // Main site.
-# $sites['DOMAINNAMEHERE.docksal'] = 'www';
-# $sites['www.DOMAINNAMEHERE.docksal'] = 'www';
+$sites['kit-dev.docksal'] = 'www';
+$sites['www.kit-dev.docksal'] = 'www';

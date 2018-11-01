@@ -1,22 +1,22 @@
 local:
   site-env: local
   root: /var/www/docroot
-  uri: http://www.PROJECTNAME.docksal
+  uri: http://www.kit-dev.docksal
 remote_dev:
   site-env: dev
   host:
   user:
   root:
-  uri: http://dev-www.PROJECTNAME.com
+  uri: http://dev-www.kit-dev.com
 remote_stage:
   site-env: stage
   host:
   user:
   root:
-  uri: http://stg-www.PROJECTNAME.com
+  uri: http://stg-www.kit-dev.com
 remote_prod:
   site-env: prod
   host:
   user:
   root:
-  uri: http://www.PROJECTNAME.com
+  uri: http://www.kit-dev.com
