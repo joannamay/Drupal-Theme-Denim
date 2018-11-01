@@ -57,5 +57,5 @@
  */
 
 // Main site.
-$sites['kit-dev.docksal'] = 'www';
-$sites['www.kit-dev.docksal'] = 'www';
+$sites['kitdev.docksal'] = 'www';
+$sites['www.kitdev.docksal'] = 'www';
