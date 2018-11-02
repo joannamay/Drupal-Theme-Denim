@@ -23,10 +23,13 @@ global:
   css:
     theme:
       css/main.css : {}
-      # css/layout.css : {}
+      css/styleguide.css : {}
+  js:
+    js/styleguide.js: {}
   dependencies:
     - core/drupal
-
+    - core/jquery
+    - core/jquery.once
 
 # === Global: External Libraries === #
 
