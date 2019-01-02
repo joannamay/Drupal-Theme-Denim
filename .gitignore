@@ -52,7 +52,5 @@ node_modules
 /.docksal/commands/kit
 
 # Ignore KIT dev theme files
-/docroot/themes/custom/denim
 /docroot/themes/custom/skeleto
-/source/themes/denim
 /source/themes/skeleto
