@@ -5,9 +5,98 @@
  * Functions to support theming in the denim theme.
  */
 
+use Drupal\Component\Utility\NestedArray;
+use Drupal\media\Entity\Media;
+
 include_once 'preprocess/block.preprocess.php';
 include_once 'preprocess/media.preprocess.php';
 include_once 'preprocess/node.preprocess.php';
 include_once 'preprocess/paragraph.preprocess.php';
 include_once 'preprocess/view.preprocess.php';
 
+/**
+ * Implements hook_preprocess_blazy().
+ */
+function denim_preprocess_blazy(&$variables) {
+  // @todo watch these tickets and remove this portion of the code when they're
+  //       merged into core and we can properly batch-update/update alt tags.
+  // @link https://www.drupal.org/project/drupal/issues/2983456
+  // @link https://www.drupal.org/project/drupal/issues/2878119
+  if (isset($variables['element']['#item']) && ($item = $variables['element']['#item']) && method_exists($item, 'getEntity')) {
+    $entity = $item->getEntity();
+    if ($entity instanceof Media) {
+      $alt = $entity->getSource()->getMetadata($entity, 'thumbnail_alt_value');
+      $variables['image']['#attributes']['alt'] = $alt;
+      $variables['item_attributes']['alt'] = $alt;
+    }
+    if (isset($variables['settings']['height']) && isset($variables['settings']['width'])) {
+      $variables['image']['#attributes']['height'] = $variables['item_attributes']['height'] = $variables['settings']['height'];
+      $variables['image']['#attributes']['width'] = $variables['item_attributes']['width'] = $variables['settings']['width'];
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_breadcrumb().
+ */
+function denim_preprocess_breadcrumb(&$variables) {
+  // Unset 'Home' from being rendered in breadcrumb.
+  unset($variables['links'][0]);
+  unset($variables['breadcrumb'][0]);
+}
+
+/**
+ * Implements hook_preprocess_responsive_image().
+ */
+function denim_preprocess_responsive_image(&$variables) {
+  // Blazy placeholder override.
+  if (substr($variables['img_element']['#uri'], 0 ,21) === 'data:image/gif;base64') {
+
+    // Try to determine height based on different parent key options.
+    $height = NULL;
+    $height_parent_options[] = ['height'];
+    $height_parent_options[] = ['attributes', 'height'];
+    $height_parent_options[] = ['img_element', '#attributes', 'height'];
+    while (is_null($height) && current($height_parent_options)) {
+      $height = NestedArray::getValue($variables, current($height_parent_options));
+      next($height_parent_options);
+    }
+
+    // Try to determine width based on different parent key options.
+    $width = NULL;
+    $width_parent_options[] = ['width'];
+    $width_parent_options[] = ['attributes', 'width'];
+    $width_parent_options[] = ['img_element', '#attributes', 'width'];
+    while (is_null($width) && current($width_parent_options)) {
+      $width = NestedArray::getValue($variables, current($width_parent_options));
+      next($width_parent_options);
+    }
+
+    // Override with aspect-ratio correct  placeholder if height/width found.
+    if (!is_null($height) && !is_null($width)) {
+      $variables['img_element']['#uri'] = "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 {$width} {$height}'%3e%3c/svg%3e";
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_responsive_image_formatter().
+ */
+function denim_preprocess_responsive_image_formatter(&$variables) {
+  if (!empty($variables['responsive_image']['#height']) && !empty($variables['responsive_image']['#width'])) {
+    $variables['responsive_image']['#attributes']['height'] = $variables['responsive_image']['#height'];
+    $variables['responsive_image']['#attributes']['width'] = $variables['responsive_image']['#width'];
+  }
+
+  // @todo watch these tickets and remove this portion of the code when they're
+  //       merged into core and we can properly batch-update/update alt tags.
+  // @link https://www.drupal.org/project/drupal/issues/2983456
+  // @link https://www.drupal.org/project/drupal/issues/2878119
+  /** @var \Drupal\image\Plugin\Field\FieldType\ImageItem $variables['item'] */
+  $entity = $variables['item']->getEntity();
+  if ($entity instanceof Media) {
+    $alt = $entity->getSource()->getMetadata($entity, 'thumbnail_alt_value');
+    $variables['responsive_image']['#attributes']['alt'] = $alt;
+    $variables['item']->set('alt', $alt);
+  }
+}

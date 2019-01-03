@@ -12,6 +12,18 @@ features:
   favicon: true
 libraries:
   - denim/global
+libraries-override:
+  contextual/drupal.contextual-links:
+    css:
+      component:
+        css/contextual.module.css: css/contextual/contextual.module.css
+      theme:
+        css/contextual.theme.css: css/contextual/contextual.theme.css
+        css/contextual.icons.theme.css: css/contextual/contextual.icons.theme.css
+  contextual/drupal.contextual-toolbar:
+    css:
+      component:
+        css/contextual.toolbar.css: css/contextual/contextual.toolbar.css
 
 regions:
   page_top: 'Page top'

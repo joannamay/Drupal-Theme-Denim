@@ -23,9 +23,6 @@ global:
   css:
     theme:
       css/main.css : {}
-      css/styleguide.css : {}
-  js:
-    js/styleguide.js: {}
   dependencies:
     - core/drupal
     - core/jquery
@@ -79,15 +76,6 @@ library--slick:
   js:
     //cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js: { type: external, minified: true }
 
-# === Global: Component === #
-component--video-embed-iframe-deferred:
-  version: 1.x
-  js:
-    js/libraries/dataset/video-embed-iframe-deferred.js: {}
-  dependencies:
-    - core/drupal
-    - core/jquery
-    - core/jquery.once
 
 # === Global: Regions === #
 
@@ -98,32 +86,13 @@ region:
     component:
       css/libraries/region/default.css: {}
 
-# Content #
-region--content:
-  version: 1.x
-  css:
-    component:
-      css/libraries/region/content.css: {}
-
-# Footer #
-region--footer-first:
-  version: 1.x
-  css:
-    component:
-      css/libraries/region/footer-first.css: {}
-
 # Header #
 region--header:
   version: 1.x
   css:
     component:
       css/libraries/region/header.css: {}
-  js:
-    js/libraries/region/header.js: {}
-  dependencies:
-    - core/drupal
-    - core/jquery
-    - core/jquery.once
+
 
 # ========= Block ========= #
 
@@ -144,21 +113,16 @@ region--header:
 #    component:
 #      css/libraries/form/default.css: {}
 
-# ========= Media ========= #
 
-# === Media: Masonry === #
-media--masonry:
-  version: 1.x
-  css:
-    component:
-      css/libraries/media/teaser-and-masonry.css: {}
+# ========= Media ========= #
 
 # === Media: Teaser === #
 media--teaser:
   version: 1.x
   css:
     component:
-      css/libraries/media/teaser-and-masonry.css: {}
+      css/libraries/media/teaser.css: {}
+
 
 # ========= Nodes ========= #
 
@@ -171,27 +135,12 @@ node--full:
       css/libraries/node/full.css: {}
 
 # === Node: Teaser === #
-node--teaser:
-  version: 1.x
-  css:
-    component:
-      css/libraries/node/teaser-and-masonry.css: {}
-      css/libraries/node/teaser.css: {}
+#node--teaser:
+#  version: 1.x
+#  css:
+#    component:
+#      css/libraries/node/teaser.css: {}
 
-# === Node: Masonry === #
-node--masonry:
-  version: 1.x
-  css:
-    component:
-      css/libraries/node/teaser-and-masonry.css: {}
-      css/libraries/node/masonry.css: {}
-
-# === Node: Summary === #
-node--summary:
-  version: 1.x
-  css:
-    component:
-      css/libraries/node/summary.css: {}
 
 # ========= Paragraphs ========= #
 
@@ -218,12 +167,12 @@ paragraph--full--accordion:
     - core/jquery.once
     - denim/library--jquery-roving-tabindex
 
-# CTA #
-paragraph--full--cta:
+# Content #
+paragraph--full--content:
   version: 1.x
   css:
     component:
-      css/libraries/paragraph/full--cta.css: {}
+      css/libraries/paragraph/full--content.css: {}
 
 # Hero #
 paragraph--full--hero:
@@ -253,92 +202,80 @@ paragraph--full--hero-slide:
     - core/jquery.once
 
 # Featured: Content #
-paragraph--full--content:
+paragraph--full--featured-content:
   version: 1.x
   css:
     component:
-      css/libraries/paragraph/full--content.css: {}
-paragraph--full--list-content:
+      css/libraries/paragraph/full--featured-content.css: {}
+paragraph--full--featured-content--layout-grid:
   version: 1.x
   css:
     component:
-      css/libraries/paragraph/full--list-content.css: {}
-paragraph--full--list-content--layout-grid:
-  version: 1.x
-  css:
-    component:
-      css/libraries/paragraph/full--list-content--layout-grid.css: {}
+      css/libraries/paragraph/full--featured-content--layout-grid.css: {}
   dependencies:
-    - denim/paragraph--list-content
-paragraph--full--list-content--layout-list:
+    - denim/paragraph--featured-content
+paragraph--full--featured-content--layout-list:
   version: 1.x
   css:
     component:
-      css/libraries/paragraph/full--list-content--layout-list.css: {}
+      css/libraries/paragraph/full--featured-content--layout-list.css: {}
   dependencies:
-    - denim/paragraph--list-content
-paragraph--full--list-content--layout-masonry:
+    - denim/paragraph--featured-content
+paragraph--full--featured-content--layout-masonry:
   version: 1.x
   css:
     component:
-      css/libraries/paragraph/full--list-content--layout-masonry.css: {}
+      css/libraries/paragraph/full--featured-content--layout-masonry.css: {}
   js:
-    js/libraries/paragraph/full--list-content--layout-masonry.js: {weight: -10}
+    js/libraries/paragraph/full--featured-content--layout-masonry.js: {weight: -10}
   dependencies:
     - core/drupal
     - core/jquery
     - core/jquery.once
-    - denim/paragraph--list-content
-paragraph--full--list-content--layout-summary:
-  version: 1.x
-  css:
-    component:
-      css/libraries/paragraph/full--list-content--layout-summary.css: {}
-  dependencies:
-    - denim/paragraph--list-content
+    - denim/paragraph--featured-content
 
 # Featured: Media #
-paragraph--full--media:
+paragraph--full--featured-media:
   version: 1.x
   css:
     component:
-      css/libraries/paragraph/full--media.css: {}
+      css/libraries/paragraph/full--featured-media.css: {}
   dependencies:
     - core/drupal
     - core/jquery
     - core/jquery.once
-paragraph--full--media--layout-full:
+paragraph--full--featured-media--layout-full:
   version: 1.x
   css:
     component:
-      css/libraries/paragraph/full--media--layout-full.css: {}
+      css/libraries/paragraph/full--featured-media--layout-full.css: {}
   dependencies:
-    - denim/paragraph--full--media
-paragraph--full--media--layout-grid:
+    - denim/paragraph--full--featured-media
+paragraph--full--featured-media--layout-grid:
   version: 1.x
   css:
     component:
-      css/libraries/paragraph/full--media--layout-grid.css: {}
+      css/libraries/paragraph/full--featured-media--layout-grid.css: {}
   dependencies:
-    - denim/paragraph--full--media
-paragraph--full--media--layout-masonry:
+    - denim/paragraph--full--featured-media
+paragraph--full--featured-media--layout-masonry:
   version: 1.x
   css:
     component:
-      css/libraries/paragraph/full--media--layout-masonry.css: {}
+      css/libraries/paragraph/full--featured-media--layout-masonry.css: {}
   js:
-    js/libraries/paragraph/full--media--layout-masonry.js: {weight: -10}
+    js/libraries/paragraph/full--featured-media--layout-masonry.js: {weight: -10}
   dependencies:
-    - denim/paragraph--full--media
-paragraph--full--media--layout-slider:
+    - denim/paragraph--full--featured-media
+paragraph--full--featured-media--layout-slider:
   version: 1.x
   css:
     component:
-      css/libraries/paragraph/full--media--layout-slider.css: {}
+      css/libraries/paragraph/full--featured-media--layout-slider.css: {}
   js:
-    js/libraries/paragraph/full--media--layout-slider.js: {}
+    js/libraries/paragraph/full--featured-media--layout-slider.js: {}
   dependencies:
-    - denim/paragraph--full--media
+    - denim/paragraph--full--featured-media
     - denim/library--slick
 
 # List Links #
