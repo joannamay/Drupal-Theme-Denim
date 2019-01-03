@@ -5,47 +5,8 @@
  * Functions to support theming in the denim theme.
  */
 
-use Drupal\Component\Utility\Html;
-
 include_once 'preprocess/block.preprocess.php';
 include_once 'preprocess/media.preprocess.php';
 include_once 'preprocess/node.preprocess.php';
 include_once 'preprocess/paragraph.preprocess.php';
 include_once 'preprocess/view.preprocess.php';
-
-/**
- * Implements hook_preprocess_region().
- */
-function denim_preprocess_region(&$variables) {
-  // Attach default and bundle-specific libraries.
-  _bazo_attach_libraries($variables, 'region', $variables['region']);
-
-  $bundles_css = Html::cleanCssIdentifier($variables['region']);
-
-  $variables['content_attributes']['class'][] = "region-{$bundles_css}__inner";
-
-  switch ($variables['region']) {
-    case 'page_start':
-      break;
-
-    case 'header':
-      break;
-
-    case 'pre_content':
-      break;
-
-    case 'content':
-      break;
-
-    case 'post_content':
-      break;
-
-    case 'footer_first':
-    case 'footer_second':
-    case 'footer_third':
-      break;
-
-    case 'page_end':
-      break;
-  }
-}
