@@ -1,0 +1,400 @@
+# Library naming structure
+#
+# library--{library-name}
+#   Use library naming structure for external libraries that will then be used as dependencies of other libraries.
+#
+# component--{component-name}
+#   Use component naming structure for reusable items that aren't necessarily entity-specific. Include these as
+#   dependencies on the entity-specific libraries.
+#
+# {entity-type}--{view-mode}
+# {entity-type}--{view-mode}--{bundle}
+#   Use entity naming structure to allow the entities to automatically attach styles when rendered.
+#
+# NOTE: Entity CSS and JS files that are included in multiple different entity-specific libraries, should probably be
+#       broken into the component structure listed above and added as a dependency on the entity-specific library.
+#
+
+# ========= Globals ========= #
+
+# === Global: Base === #
+global:
+  version: 1.0
+  css:
+    theme:
+      css/main.css : {}
+      css/styleguide.css : {}
+  js:
+    js/styleguide.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+
+# === Global: External Libraries === #
+
+# jQuery: Common  #
+library--jquery-common-keydown:
+  version: 1.x
+  js:
+    //cdn.jsdelivr.net/npm/jquery-common-keydown@1.0.1/jquery.commonkeydown.min.js: { type: external, minified: true }
+
+# jQuery: Grid Navigation #
+library--jquery-grid-navigation:
+  version: 1.x
+  js:
+    //cdn.jsdelivr.net/npm/jquery-grid-navigation@1.0.1/jquery.gridnavigation.min.js: { type: external, minified: true }
+
+# jQuery: Linear Navigation #
+library--jquery-linear-navigation:
+  version: 1.x
+  js:
+    //cdn.jsdelivr.net/npm/jquery-linear-navigation@1.0.1/jquery.linearnavigation.min.js: { type: external, minified: true }
+
+# jQuery: Prevent Scroll Keys #
+library--jquery-prevent-scroll-keys:
+  version: 1.x
+  js:
+    //cdn.jsdelivr.net/npm/jquery-prevent-scroll-keys@1.0.1/jquery.preventscrollkeys.min.js: { type: external, minified: true }
+
+# jQuery: Roving Tabindex #
+library--jquery-roving-tabindex:
+  version: 1.x
+  js:
+    //cdn.jsdelivr.net/npm/jquery-roving-tabindex@1.0.1/jquery.rovingtabindex.min.js: { type: external, minified: true }
+  dependencies:
+    - core/jquery
+    - denim/library--jquery-common-keydown
+    - denim/library--jquery-grid-navigation
+    - denim/library--jquery-linear-navigation
+    - denim/library--jquery-prevent-scroll-keys
+
+# Slick Slider #
+library--slick:
+  version: 1.x
+  css:
+    component:
+      //cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css: { type: external }
+      //cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css: { type: external }
+  js:
+    //cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js: { type: external, minified: true }
+
+# === Global: Component === #
+component--video-embed-iframe-deferred:
+  version: 1.x
+  js:
+    js/libraries/dataset/video-embed-iframe-deferred.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+
+# === Global: Regions === #
+
+# Global #
+region:
+  version: 1.x
+  css:
+    component:
+      css/libraries/region/default.css: {}
+
+# Content #
+region--content:
+  version: 1.x
+  css:
+    component:
+      css/libraries/region/content.css: {}
+
+# Footer #
+region--footer-first:
+  version: 1.x
+  css:
+    component:
+      css/libraries/region/footer-first.css: {}
+
+# Header #
+region--header:
+  version: 1.x
+  css:
+    component:
+      css/libraries/region/header.css: {}
+  js:
+    js/libraries/region/header.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+
+# ========= Block ========= #
+
+# Global #
+#block:
+#  version: 1.x
+#  css:
+#    component:
+#      css/libraries/block/default.css: {}
+
+
+# ========= Forms ========= #
+
+# Global #
+#form:
+#  version: 1.x
+#  css:
+#    component:
+#      css/libraries/form/default.css: {}
+
+# ========= Media ========= #
+
+# === Media: Masonry === #
+media--masonry:
+  version: 1.x
+  css:
+    component:
+      css/libraries/media/teaser-and-masonry.css: {}
+
+# === Media: Teaser === #
+media--teaser:
+  version: 1.x
+  css:
+    component:
+      css/libraries/media/teaser-and-masonry.css: {}
+
+# ========= Nodes ========= #
+
+# === Node: Full === #
+
+node--full:
+  version: 1.x
+  css:
+    component:
+      css/libraries/node/full.css: {}
+
+# === Node: Teaser === #
+node--teaser:
+  version: 1.x
+  css:
+    component:
+      css/libraries/node/teaser-and-masonry.css: {}
+      css/libraries/node/teaser.css: {}
+
+# === Node: Masonry === #
+node--masonry:
+  version: 1.x
+  css:
+    component:
+      css/libraries/node/teaser-and-masonry.css: {}
+      css/libraries/node/masonry.css: {}
+
+# === Node: Summary === #
+node--summary:
+  version: 1.x
+  css:
+    component:
+      css/libraries/node/summary.css: {}
+
+# ========= Paragraphs ========= #
+
+# === Paragraph: Full === #
+
+# Global #
+#paragraph--full:
+#  version: 1.x
+#  css:
+#    component:
+#      css/libraries/paragraph/full.css: {}
+
+# Accordion #
+paragraph--full--accordion:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--accordion.css: {}
+  js:
+    js/libraries/paragraph/full--accordion.js: {weight: -10}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+    - denim/library--jquery-roving-tabindex
+
+# CTA #
+paragraph--full--cta:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--cta.css: {}
+
+# Hero #
+paragraph--full--hero:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--hero.css: {}
+  js:
+    js/libraries/paragraph/full--hero.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+    - denim/library--slick
+
+# Hero Slide #
+paragraph--full--hero-slide:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--hero-slide.css: {}
+  js:
+    js/libraries/paragraph/full--hero-slide.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+
+# Featured: Content #
+paragraph--full--content:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--content.css: {}
+paragraph--full--list-content:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--list-content.css: {}
+paragraph--full--list-content--layout-grid:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--list-content--layout-grid.css: {}
+  dependencies:
+    - denim/paragraph--list-content
+paragraph--full--list-content--layout-list:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--list-content--layout-list.css: {}
+  dependencies:
+    - denim/paragraph--list-content
+paragraph--full--list-content--layout-masonry:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--list-content--layout-masonry.css: {}
+  js:
+    js/libraries/paragraph/full--list-content--layout-masonry.js: {weight: -10}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+    - denim/paragraph--list-content
+paragraph--full--list-content--layout-summary:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--list-content--layout-summary.css: {}
+  dependencies:
+    - denim/paragraph--list-content
+
+# Featured: Media #
+paragraph--full--media:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--media.css: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+paragraph--full--media--layout-full:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--media--layout-full.css: {}
+  dependencies:
+    - denim/paragraph--full--media
+paragraph--full--media--layout-grid:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--media--layout-grid.css: {}
+  dependencies:
+    - denim/paragraph--full--media
+paragraph--full--media--layout-masonry:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--media--layout-masonry.css: {}
+  js:
+    js/libraries/paragraph/full--media--layout-masonry.js: {weight: -10}
+  dependencies:
+    - denim/paragraph--full--media
+paragraph--full--media--layout-slider:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--media--layout-slider.css: {}
+  js:
+    js/libraries/paragraph/full--media--layout-slider.js: {}
+  dependencies:
+    - denim/paragraph--full--media
+    - denim/library--slick
+
+# List Links #
+paragraph--full--list-links:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--list-links.css: {}
+
+# Location Information #
+paragraph--full--location-info:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--location-info.css: {}
+
+# Pull Quote #
+paragraph--full--pullquote:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--pullquote.css: {}
+
+# Section #
+paragraph--full--section:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--section.css: {}
+
+# Slider #
+paragraph--full--slider:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--slider.css: {}
+  js:
+    js/libraries/paragraph/full--slider.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+    - denim/library--slick
+
+# Tabs #
+paragraph--full--tabs:
+  version: 1.x
+  css:
+    component:
+      css/libraries/paragraph/full--tabs.css: {}
+  js:
+    js/libraries/paragraph/full--tabs.js: {weight: -10}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+    - denim/library--jquery-roving-tabindex
+
+# ========= Views ========= #

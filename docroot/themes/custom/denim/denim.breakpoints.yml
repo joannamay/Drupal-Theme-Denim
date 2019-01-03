@@ -1,0 +1,76 @@
+denim.All:
+  label: All
+  mediaQuery: 'all'
+  weight: 0
+  multipliers:
+    - 1x
+# max (30.00 x 16px == 480px)
+denim.xsmall:
+  label: Extra Small (max)
+  mediaQuery: 'all and (max-width: 30em)'
+  weight: 1
+  multipliers:
+    - 1x
+# min (30.01 x 16px ~= 481px)
+# max (35.50 x 16px == 768px)
+denim.small_min:
+  label: Small (min)
+  mediaQuery: 'all and (min-width: 30.01em)'
+  weight: 2
+  multipliers:
+    - 1x
+denim.small:
+  label: Small
+  mediaQuery: 'all and (min-width: 30.01em) and (max-width: 35.5em)'
+  weight: 2
+  multipliers:
+    - 1x
+# min (35.51 x 16px ~= 769px)
+# max (48.00 x 16px == 980px)
+denim.medium_min:
+  label: Medium (min)
+  mediaQuery: 'all and (min-width: 35.51em)'
+  weight: 3
+  multipliers:
+    - 1x
+denim.medium:
+  label: Medium
+  mediaQuery: 'all and (min-width: 35.51em) and (max-width: 48em)'
+  weight: 3
+  multipliers:
+    - 1x
+# min (48.01 x 16px ~= 981px)
+# max (61.25 x 16px == 1280px)
+denim.large_min:
+  label: Large
+  mediaQuery: 'all and (min-width: 48.01em)'
+  weight: 4
+  multipliers:
+    - 1x
+denim.large:
+  label: Large
+  mediaQuery: 'all and (min-width: 48.01em) and (max-width: 61.25em)'
+  weight: 4
+  multipliers:
+    - 1x
+# min (61.26 x 16px ~= 1281px)
+# max (80.00 x 16px == 1450px)
+denim.xlarge_min:
+  label: Extra Large (min)
+  mediaQuery: 'all and (min-width: 61.26em)'
+  weight: 5
+  multipliers:
+    - 1x
+denim.xlarge:
+  label: Extra Large
+  mediaQuery: 'all and (min-width: 61.26em) and (max-width: 80em)'
+  weight: 5
+  multipliers:
+    - 1x
+# min (61.26 x 16px ~= 1281px)
+denim.grande:
+  label: Grande (min)
+  mediaQuery: 'all and (min-width: 80.01em)'
+  weight: 6
+  multipliers:
+    - 1x
