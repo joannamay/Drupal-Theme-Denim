@@ -71,7 +71,17 @@ function denim_preprocess_media__remote_video__hero(array &$variables) {
 
     // Make modifications to the embed based on provider.
     switch ($provider) {
+      case 'vimeo':
+        $variables['media_embed'][0]['children']['#attributes']['title'] = $media->label();
+        $variables['media_embed'][0]['children']['#query']['autoplay'] = 1;
+        $variables['media_embed'][0]['children']['#query']['background'] = 1;
+        $variables['media_embed'][0]['children']['#query']['loop'] = 1;
+        $variables['media_embed'][0]['children']['#query']['muted'] = 1;
+        break;
+
       case 'youtube':
+        $variables['media_embed'][0]['children']['#attributes']['title'] = $media->label();
+        $variables['media_embed'][0]['children']['#attributes']['tabindex'] = '-1';
         $variables['media_embed'][0]['children']['#query']['autoplay'] = 1;
         $variables['media_embed'][0]['children']['#query']['showinfo'] = 0;
         $variables['media_embed'][0]['children']['#query']['controls'] = 0;

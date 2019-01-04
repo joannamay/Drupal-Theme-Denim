@@ -113,38 +113,16 @@ function denim_preprocess_paragraph__accordion_item__full(array &$variables) {
  * Implements hook_preprocess_paragraph__BUNDLE__VIEW_MODE() for content, full.
  */
 function denim_preprocess_paragraph__content__full(array &$variables) {
-  // Nothing to see here.
-}
-
-/**
- * Implements hook_preprocess_paragraph__BUNDLE__VIEW_MODE() for hero, full.
- */
-function denim_preprocess_paragraph__hero__full(array &$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $base_class = $variables['component_base_class'];
 
-  // Track whether the hero has slides.
-  $variables['has_slides'] = !$paragraph->get('field_components')->isEmpty();
-}
-
-/**
- * Implements hook_preprocess_paragraph__BUNDLE__VIEW_MODE() for hero_slide,
- * full.
- */
-function denim_preprocess_paragraph__hero_slide__full(array &$variables) {
-  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
-  $paragraph = $variables['paragraph'];
-  $base_class = $variables['component_base_class'];
-
-  // Initialize variables.
-  $variables['inner_attributes']['class'][] = "{$base_class}__inner";
-
-  // Move media field to new variable.
-  $variables['media'] = $variables['content']['field_media_background'];
-  unset($variables['media']['#theme']);
-  unset($variables['content']['field_media_background']);
-
+  // Move cta link to footer and add class.
+  if (array_key_exists('field_link', $variables['content']) && !empty($variables['content']['field_link'])) {
+    $variables['footer']['field_link'] = $variables['content']['field_link'];
+    $variables['footer']['field_link'][0]['#options']['attributes']['class'] = "{$base_class}__link button";
+    unset($variables['content']['field_link'], $variables['footer']['field_link']['#theme']);
+  }
 }
 
 /**
@@ -182,36 +160,193 @@ function denim_preprocess_paragraph__embed_iframe__full(array &$variables) {
 }
 
 /**
- * Implements hook_preprocess_paragraph__VIEW_MODE() for media, full.
+ * Implements hook_preprocess_paragraph__BUNDLE__VIEW_MODE() for featured_content, full.
  */
-function denim_preprocess_paragraph__media__full(array &$variables) {
+function denim_preprocess_paragraph__featured_content__full(array &$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $base_class = $variables['component_base_class'];
 
-  // Attach additional libraries based on the current layout style.
-  if (!$paragraph->get('field_media_layout')->isEmpty()) {
-    switch($paragraph->get('field_media_layout')->target_id) {
-      case 'media_layout__full':
-        $variables['#attached']['library'][] = 'denim/paragraph--full--media--layout-full';
-        break;
+  // Determine changes based on selected layout.
+  $layout = ($paragraph->get('field_layout')->isEmpty()) ? NULL : $paragraph->get('field_layout')->target_id;
+  switch ($layout) {
+    case 'featured_content_layout__grid':
+      $variables['#attached']['library'][] = 'denim/paragraph--full--featured-content--layout-grid';
+      $field_settings['type'] = 'entity_reference_entity_view';
+      $field_settings['settings']['view_mode'] = 'teaser';
+      $field_settings['label'] = 'hidden';
+      break;
 
-      case 'media_layout__grid':
-        $variables['#attached']['library'][] = 'denim/paragraph--full--media--layout-grid';
-        break;
+    case 'featured_content_layout__masonry':
+      $variables['#attached']['library'][] = 'denim/paragraph--full--featured-content--layout-masonry';
+      $field_settings['type'] = 'entity_reference_entity_view';
+      $field_settings['settings']['view_mode'] = 'masonry';
+      $field_settings['label'] = 'hidden';
+      break;
 
-      case 'media_layout__masonry':
-        $variables['#attached']['library'][] = 'denim/paragraph--full--media--layout-masonry';
-        break;
-
-      case 'media_layout__slider':
-        $variables['#attached']['library'][] = 'denim/paragraph--full--media--layout-slider';
-        break;
-    }
+    case 'featured_content_layout__list':
+    default:
+      $variables['#attached']['library'][] = 'denim/paragraph--full--featured-content--layout-list';
+      $field_settings['type'] = 'entity_reference_label';
+      $field_settings['settings']['link'] = TRUE;
+      $field_settings['label'] = 'hidden';
   }
 
-  // Unset media field theme wrapper.
-  unset($variables['content']['field_media']['#theme']);
+  // Replace field with new settings.
+  $variables['content']['field_related_nodes'] = $paragraph->get('field_related_nodes')->view($field_settings);
+
+  // Convert field_related_nodes to unordered list.
+  $variables['list']['#attributes']['class'][] = "{$base_class}__list";
+  $variables['list']['#wrapper_attributes'] = [];
+  $variables['list']['#items'] = [];
+  $variables['list']['#theme'] = 'item_list';
+
+  // Hide list content heading. This is rendered and visually hidden for accessibility.
+  $variables['title_attributes']['class'][] = 'visually-hidden';
+
+  // Run through field items'.
+  foreach (Element::children($variables['content']['field_related_nodes']) as $delta) {
+    // Add class to list-item.
+    $variables['content']['field_related_nodes'][$delta]['#wrapper_attributes']['class'][] = "{$base_class}__list-item";
+    // Add field item to list item.
+    $variables['list']['#items'][] = $variables['content']['field_related_nodes'][$delta];
+  }
+  // Remove field render array.
+  unset($variables['content']['field_related_nodes']);
+}
+
+/**
+ * Implements hook_preprocess_paragraph__VIEW_MODE() for media, full.
+ */
+function denim_preprocess_paragraph__featured_media__full(array &$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+  $base_class = $variables['component_base_class'];
+
+  // Determine changes based on selected layout.
+  $layout = ($paragraph->get('field_layout')->isEmpty()) ? NULL : $paragraph->get('field_layout')->target_id;
+  switch ($layout) {
+    case 'featured_media_layout__grid':
+      $variables['#attached']['library'][] = 'denim/paragraph--full--featured-media--layout-grid';
+      $field_settings['type'] = 'entity_reference_entity_view';
+      $field_settings['settings']['view_mode'] = 'teaser';
+      $field_settings['label'] = 'hidden';
+      break;
+
+    case 'featured_media_layout__masonry':
+      $variables['#attached']['library'][] = 'denim/paragraph--full--featured-media--layout-masonry';
+      $field_settings['type'] = 'entity_reference_entity_view';
+      $field_settings['settings']['view_mode'] = 'masonry';
+      $field_settings['label'] = 'hidden';
+      break;
+
+    case 'featured_media_layout__slider':
+      $variables['#attached']['library'][] = 'denim/paragraph--full--featured-media--layout-slider';
+      $field_settings['type'] = 'entity_reference_entity_view';
+      $field_settings['settings']['view_mode'] = 'embed';
+      $field_settings['label'] = 'hidden';
+      break;
+
+    case 'featured_media_layout__full':
+    default:
+      $variables['#attached']['library'][] = 'denim/paragraph--full--featured-media--layout-full';
+      $field_settings['type'] = 'entity_reference_entity_view';
+      $field_settings['settings']['view_mode'] = 'embed';
+      $field_settings['label'] = 'hidden';
+      break;
+  }
+
+  // Replace field with new settings.
+  $variables['content']['field_media_items'] = $paragraph->get('field_media_items')->view($field_settings);
+
+  // Convert field_media to unordered list.
+  $variables['list']['#attributes']['class'][] = "{$base_class}__list";
+  $variables['list']['#wrapper_attributes'] = [];
+  $variables['list']['#items'] = [];
+  $variables['list']['#theme'] = 'item_list';
+
+  // Run through field items'.
+  foreach (Element::children($variables['content']['field_media_items']) as $delta) {
+    // Add class to list-item.
+    $variables['content']['field_media_items'][$delta]['#wrapper_attributes']['class'][] = "{$base_class}__list-item";
+    // Add field item to list item.
+    $variables['list']['#items'][] = $variables['content']['field_media_items'][$delta];
+  }
+
+  // Remove field render array.
+  unset($variables['content']['field_media_items']);
+}
+
+/**
+ * Implements hook_preprocess_paragraph__BUNDLE__VIEW_MODE() for hero, full.
+ */
+function denim_preprocess_paragraph__hero__full(array &$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+  $base_class = $variables['component_base_class'];
+
+  // Track whether the hero has slides.
+  $variables['has_slides'] = !$paragraph->get('field_components')->isEmpty();
+}
+
+/**
+ * Implements hook_preprocess_paragraph__BUNDLE__VIEW_MODE() for hero_slide,
+ * full.
+ */
+function denim_preprocess_paragraph__hero_slide__full(array &$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+  $base_class = $variables['component_base_class'];
+
+  // Initialize variables.
+  $variables['inner_attributes']['class'][] = "{$base_class}__inner";
+
+  // Move media field to new variable.
+  $variables['media'] = $variables['content']['field_media_background'];
+  unset($variables['media']['#theme']);
+  unset($variables['content']['field_media_background']);
+}
+
+/**
+ * Implements hook_preprocess_paragraph__BUNDLE__VIEW_MODE() for list_links, full.
+ */
+function denim_preprocess_paragraph__list_links__full(array &$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+  $base_class = $variables['component_base_class'];
+
+  // Convert field_links to unordered list.
+  $variables['list']['#attributes']['class'][] = "{$base_class}__list";
+  $variables['list']['#wrapper_attributes'] = [];
+  $variables['list']['#items'] = [];
+  $variables['list']['#theme'] = 'item_list';
+  // Run through field items'.
+  foreach (Element::children($variables['content']['field_links']) as $delta) {
+    // Add class to list-item.
+    $variables['content']['field_links'][$delta]['#wrapper_attributes']['class'][] = "{$base_class}__list-item";
+    // Add field item to list item.
+    $variables['list']['#items'][] = $variables['content']['field_links'][$delta];
+  }
+  // Remove field render array.
+  unset($variables['content']['field_links']);
+}
+
+/**
+ * Implements hook_preprocess_paragraph__VIEW_MODE() for pullquote, full.
+ */
+function denim_preprocess_paragraph__pullquote__full(array &$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+  $base_class = $variables['component_base_class'];
+
+  // Remove wrapper from field_content_plain.
+  unset($variables['content']['field_content_plain']['#theme']);
+
+  // Move attribution to footer.
+  if (array_key_exists('field_attribution', $variables['content']) && !empty($variables['content']['field_attribution'])) {
+    $variables['footer']['field_attribution'] = $variables['content']['field_attribution'];
+    unset($variables['content']['field_attribution']);
+  }
 }
 
 /**
