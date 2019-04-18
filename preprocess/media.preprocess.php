@@ -77,6 +77,7 @@ function denim_preprocess_media__remote_video__hero(array &$variables) {
         $variables['media_embed'][0]['children']['#query']['background'] = 1;
         $variables['media_embed'][0]['children']['#query']['loop'] = 1;
         $variables['media_embed'][0]['children']['#query']['muted'] = 1;
+        $variables['media_embed'][0]['children']['#query']['api'] = 1;
         break;
 
       case 'youtube':
@@ -92,6 +93,7 @@ function denim_preprocess_media__remote_video__hero(array &$variables) {
         $variables['media_embed'][0]['children']['#query']['loop'] = 1;
         $variables['media_embed'][0]['children']['#query']['modestbranding'] = 1;
         $variables['media_embed'][0]['children']['#query']['playlist'] = $provider_id;
+        $variables['media_embed'][0]['children']['#query']['enablejsapi'] = 1;
         break;
     }
   }
